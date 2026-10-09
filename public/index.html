@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<!-- index.html -->
+<html lang="en" data-theme="dark"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Smart Assistant AI Workflow</title>
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- External Design Tokens and Theme Stylesheets -->
+  <link rel="stylesheet" href="styles/tokens.css">
+  <link rel="stylesheet" href="styles/theme.css">
+
+  <style>
+    .loader {
+      border: 3px solid rgba(255, 255, 255, 0.1);
+      border-radius: 50%;
+      border-top: 3px solid var(--btn-primary-bg, #9D7BFF);
+      width: 24px;
+      height: 24px;
+      animation: spin 1s linear infinite;
+    }
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+  </style>
+</head>
+<body class="h-screen flex overflow-hidden bg-bg-base text-text-primary">
+  
+  <!-- Sidebar Panel -->
+  <aside class="w-1/3 max-w-md bg-surface-card border-r border-border-input p-6 flex flex-col h-full overflow-y-auto shadow-2xl z-10">
+    <h1 class="text-h1 font-bold mb-6 text-text-primary">Prompt Engine</h1>
+    
+    <label class="block text-sm font-medium mb-2 text-gray-400" for="templateSelect">Select Template</label>
+    <select id="templateSelect" class="w-full bg-bg-base border border-border-input rounded-lg p-3 text-text-primary focus:outline-none mb-6 transition-colors">
+      <option value="" disabled selected>-- Choose a Template --</option>
+      <option value="Write a [Tone] email to [Audience] about [Topic].">Email Generator</option>
+      <option value="Act as a [Role] expert and explain [Concept] in simple terms.">Expert Explainer</option>
+      <option value="Create a comprehensive strategy for [Target Audience] focused on [Topic/Product].">Strategy Creator</option>
+    </select>
+
+    <div id="dynamicInputs" class="flex flex-col gap-4 mb-6">
+      <!-- Dynamic inputs injected by script.js -->
+    </div>
+
+    <div class="mt-auto pt-6 border-t border-border-input">
+      <button id="generateBtn" disabled class="btn-primary w-full py-3 rounded-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed">
+        Generate AI Response
+      </button>
+    </div>
+  </aside>
+
+  <!-- Main Workspace -->
+  <main class="flex-1 bg-bg-base p-8 overflow-y-auto relative">
+    <div class="max-w-4xl mx-auto flex flex-col gap-6 pb-20" id="responseFeed">
+      <!-- Welcome Empty State -->
+      <div class="text-center text-gray-400 mt-20" id="emptyState">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-16 w-16 mx-auto mb-4 opacity-30" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z" />
+        </svg>
+        <p class="text-lg font-medium">Your workspace is empty.</p>
+        <p class="text-sm">Select a template on the left and hit generate!</p>
+      </div>
+      <!-- Generated Cards inserted here -->
+    </div>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
